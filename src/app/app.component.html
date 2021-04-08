@@ -8,6 +8,7 @@ Merhaba {{user}}<br>
   <li>telefon</li>
   <li>merhaba</li>
 </ul>
+
 <ul>
   <!--html yi manipüle ediyoruz. direktif deniyor. ngfor buit-in yerleşik angulara direktifler-->
 <!--  <li *ngFor="let product of products">{{product.productName}}</li>
@@ -20,7 +21,8 @@ Merhaba {{user}}<br>
       <app-category></app-category>
     </div>
     <div class="col-md-9">
-      <app-product></app-product>
+      <!--router outlete rooturden componen ekleniyor degisken yapi-->
+      <router-outlet></router-outlet>
     </div>
 
   </div>
@@ -28,4 +30,4 @@ Merhaba {{user}}<br>
 </div>
 
 
-<router-outlet></router-outlet>
+
