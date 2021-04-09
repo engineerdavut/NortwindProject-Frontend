@@ -1,8 +1,10 @@
+import { CartService } from './../../services/cart.service';
 import { ProductService } from './../../services/product.service';
 // import { ProductResponseModule } from './../../models/productResponseModule';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,6 +17,7 @@ export class ProductComponent implements OnInit {
 
   products:Product[]=[];
   dateLoaded=false;
+  filterText="";
 
   // productResponseModule:ProductResponseModule={
   //   data:this.products,
@@ -23,7 +26,9 @@ export class ProductComponent implements OnInit {
   // };
   //dependency injection veya instance alma olayı parantez içinde.
   constructor(private productService:ProductService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private toastService:ToastrService,
+    private cartService:CartService
     ) { }
 
   ngOnInit(): void {
@@ -53,6 +58,16 @@ export class ProductComponent implements OnInit {
       this.products=response.data
 
     })
+
+  }
+  addToCart(product:Product){
+    console.log(product);
+    if(product.productID===19){
+    this.toastService.error("Bu ürün sepete eklenemez.");
+  }else{
+    this.toastService.success("Sepete eklendi.",product.productName);
+    this.cartService.addToCart(product);
+  }
 
   }
 
